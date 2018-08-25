@@ -103,7 +103,39 @@ public class SoftReferenceQueueTest {
     当GC准备回收一个对象时，发现它还有虚引用，就会在回收前，把虚引用加入到引用队列中，程序可以通过判断队列中是否加入虚引用来判断被引用的对象是否将要GC回收，从而可以在finalize方法中采取措施。
 
 # java反射机制，动态代理基于什么原理
-反射机制，是java提供的程序在运行时能够自省，即通过反射我们可以操作类或者对象，比如获取对象的类定义，类声明的属性和方法，调用方法或者构造对象。
-动态代理是一种方便运行时构建代理，动态处理代理方法调用的机制。实现的方式有JDK自提供的动态代理，利用了反射机制，还有字节码操作，ASM CGLIB javassist
+## 反射机制
+    是java提供的程序在运行时能够自省，即通过反射我们可以操作类或者对象，比如获取对象的类定义，类声明的属性和方法，调用方法或者构造对象。
+##动态代理
+    是一种方便运行时构建代理，动态处理代理方法调用的机制。实现的方式有JDK自提供的动态代理，利用了反射机制，还有字节码操作，ASM CGLIB javassist
+## 面试问题
+    美团面试被问到反射的原理，竟然答不出来，难受，还有因为以前没用过所以基本的问题答错了。。。
+#### Class.forName method
+##### 官方api
+``` java
+public static Class<?> forName(String className)
+                        throws ClassNotFoundException
+Returns the Class object associated with the class or interface with the given string name. Invoking this method is equivalent to:
+Class.forName(className, true, currentLoader)
+where currentLoader denotes the defining class loader of the current class.
+For example, the following code fragment returns the runtime Class descriptor for the class named java.lang.Thread:
+
+Class t = Class.forName("java.lang.Thread")
+A call to forName("X") causes the class named X to be initialized.
+
+Parameters:
+className - the fully qualified name of the desired class.
+Returns:
+the Class object for the class with the specified name.
+Throws:
+LinkageError - if the linkage fails
+ExceptionInInitializerError - if the initialization provoked by this method fails
+ClassNotFoundException - if the class cannot be located
+ ```
+ ##### 具体实例
+ [例子](https://www.cnblogs.com/luoxn28/p/5686794.html)" 测试例子 "
+
+    
+
+
 
 
