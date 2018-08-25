@@ -131,8 +131,27 @@ LinkageError - if the linkage fails
 ExceptionInInitializerError - if the initialization provoked by this method fails
 ClassNotFoundException - if the class cannot be located
  ```
- ##### 具体实例
- [例子](https://www.cnblogs.com/luoxn28/p/5686794.html)" 测试例子 "
+##### 具体实例
+[例子](https://www.cnblogs.com/luoxn28/p/5686794.html ' 这是一个SB link ') 主要需要知道三个东西RTTI CLASS 类加载器步骤
+###### Class对象
+
+Class对象包含了与类有关的信息。每个类都会产生一个对应class对象如以下,这个class对象保存在.class编译后的java文件中。所有类的第一次使用时，动态的加载到JVM中。当程序创建一个对类的静态成员的引用时，就会加载这个类。Class对象仅在需要的时候才会加载。static初始化是在类加载时进行的。
+``` java
+//不会初始化静态代码块
+Class<ReflectTest> reflectTestClass = ReflectTest.class;
+//会初始化静态代码块
+Class<?> aClass = Class.forName(reflectTestClass.getName());
+
+```
+想在运行时使用类型信息，必须获取对象的Class对象的引用，使用功能Class.forName(“Base”)可以实现该目的，或者使用base.class。注意，有一点很有趣，使用功能”.class”来创建Class对象的引用时，不会自动初始化该Class对象，使用forName()会自动初始化该Class对象。为了使用类而做的准备工作一般有以下3个步骤：
+
+- 加载：由类加载器完成，找到对应的字节码，创建一个Class对象
+- 链接：验证类中的字节码，为静态域分配空间
+- 初始化：如果该类有超类，则对其初始化，执行静态初始化器和静态初始化块。
+
+可参考[《Java编程思想-第4版》类型信息章节](https://love2.io/@webeta/doc/think-in-java/11.3%20反射：运行期类信息.md)
+
+
 
     
 
